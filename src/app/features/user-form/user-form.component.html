@@ -1,0 +1,118 @@
+<section class="form-page">
+  <div class="form-card">
+    <div class="form-header">
+      <p class="form-tag">Template-Driven Form Demo</p>
+      <h1>User Registration Form</h1>
+      <p class="form-description">
+        This sample uses simple bindings so trainees can focus on learning
+        `ngModel` first.
+      </p>
+    </div>
+
+    <!--
+      ngForm creates the template-driven form object.
+      We pass it to onSubmit() when the form is submitted.
+    -->
+    <form>
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input
+          id="fullName"
+          type="text"
+          name="fullName"
+          placeholder="Enter your full name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+        />
+      </div>
+
+      <div class="form-group">
+        <span class="field-label">Gender</span>
+        <div class="choice-group">
+          @for (gender of genderOptions; track gender) {
+            <label class="choice-item">
+              <input
+                type="radio"
+                name="gender"
+                [value]="gender"
+              />
+              <span>{{ gender }}</span>
+            </label>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <span class="field-label">Skills</span>
+        <div class="choice-group">
+          <label class="choice-item">
+            <input
+              type="checkbox"
+              name="angularSkill"
+            />
+            <span>Angular</span>
+          </label>
+
+          <label class="choice-item">
+            <input
+              type="checkbox"
+              name="reactSkill"
+            />
+            <span>React</span>
+          </label>
+
+          <label class="choice-item">
+            <input
+              type="checkbox"
+              name="nodeSkill"
+            />
+            <span>Node</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select
+          id="country"
+          name="country"
+        >
+          <option value="">Select a country</option>
+          @for (country of countryOptions; track country) {
+            <option [value]="country">{{ country }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="bio">Bio</label>
+        <textarea
+          id="bio"
+          name="bio"
+          rows="4"
+          placeholder="Write a short bio"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
+</section>

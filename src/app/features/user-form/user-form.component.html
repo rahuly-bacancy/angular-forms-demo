@@ -13,37 +13,51 @@
       ngForm creates the template-driven form object.
       We pass it to onSubmit() when the form is submitted.
     -->
-    <form>
-      <div class="form-group">
-        <label for="fullName">Full Name</label>
-        <input
-          id="fullName"
-          type="text"
-          name="fullName"
-          placeholder="Enter your full name"
-        />
-      </div>
+    <form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
+      <div ngModelGroup="userInfo" class="form-group">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input
+            id="fullName"
+            type="text"
+            [(ngModel)]="fullName"
+            name="fullName"
+            placeholder="Enter your full name",
+            required
+          />
+        </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-        />
-      </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            ngModel
+            placeholder="Enter your email"
+            required
+            email
+          />
+          <span class="error-message" *ngIf="userForm.touched && userForm.controls['email']?.invalid">
+            Please enter a valid email address.
+          </span>
+        </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          placeholder="Enter your password"
-        />
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            ngModel
+            placeholder="Enter your password"
+            required=""
+          />
+          <span class="error-message" *ngIf="userForm.controls['password']?.invalid">
+            Password is required.
+          </span>
+        </div>
       </div>
-
       <div class="form-group">
         <span class="field-label">Gender</span>
         <div class="choice-group">
@@ -52,6 +66,7 @@
               <input
                 type="radio"
                 name="gender"
+                ngModel
                 [value]="gender"
               />
               <span>{{ gender }}</span>
@@ -61,39 +76,11 @@
       </div>
 
       <div class="form-group">
-        <span class="field-label">Skills</span>
-        <div class="choice-group">
-          <label class="choice-item">
-            <input
-              type="checkbox"
-              name="angularSkill"
-            />
-            <span>Angular</span>
-          </label>
-
-          <label class="choice-item">
-            <input
-              type="checkbox"
-              name="reactSkill"
-            />
-            <span>React</span>
-          </label>
-
-          <label class="choice-item">
-            <input
-              type="checkbox"
-              name="nodeSkill"
-            />
-            <span>Node</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group">
         <label for="country">Country</label>
         <select
           id="country"
           name="country"
+          ngModel
         >
           <option value="">Select a country</option>
           @for (country of countryOptions; track country) {
@@ -107,12 +94,26 @@
         <textarea
           id="bio"
           name="bio"
+          ngModel
           rows="4"
           placeholder="Write a short bio"
         ></textarea>
       </div>
 
-      <button type="submit" class="submit-button">Submit</button>
+      <div class="form-group">
+        <label class="choice-item">
+            <input
+              type="checkbox"
+              name="rememberMe"
+              ngModel
+            />
+            <span>Remember Me</span>
+          </label>
+      </div>
+
+      <button type="submit" class="submit-button" [disabled]="userForm.invalid">Submit</button>
     </form>
   </div>
+  <button class="submit-button" (click)="patchValue()">Patch Value</button>
+  <button class="submit-button" (click)="setValue()">Set Value</button>
 </section>

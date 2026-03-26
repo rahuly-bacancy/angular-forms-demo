@@ -113,3 +113,10 @@ textarea {
     font-size: 1.6rem;
   }
 }
+input.ng-invalid {
+  border-color: #dc2626;
+}
+.error-message {
+  color: #dc2626;
+  font-size: 0.875rem;
+}
